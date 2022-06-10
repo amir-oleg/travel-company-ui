@@ -1,0 +1,8 @@
+export const ADMIN_ROUTE = "/admin"
+export const LOGIN_ROUTE = "/login"
+export const REGISTRATION_ROUTE = "/registration"
+export const HOME_ROUTE = "/"
+export const HOTELS_ROUTE = "/hotels"
+export const UserRole = "User"
+export const ManagerRole = "Manager"
+export const AdminRole = "Admin"
