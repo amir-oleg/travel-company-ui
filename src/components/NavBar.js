@@ -6,7 +6,7 @@ import {NavLink, useNavigate} from "react-router-dom";
 import {Button} from "react-bootstrap";
 import {observer} from "mobx-react-lite";
 import Container from "react-bootstrap/Container";
-import {ADMIN_ROUTE, LOGIN_ROUTE, HOME_ROUTE} from "../utils/consts";
+import {LK_ROUTE, LOGIN_ROUTE, HOME_ROUTE} from "../utils/consts";
 import {Context} from "../index";
 
 const NavBar = observer(() => {
@@ -22,12 +22,12 @@ const NavBar = observer(() => {
     return (
         <Navbar bg="dark" variant="dark">
             <Container>
-                <NavLink style={{color:'white'}} to={HOME_ROUTE}>ТурФирма</NavLink>
+                <NavLink style={{color:'white'}} to={HOME_ROUTE}>Туристическая фирма</NavLink>
                 {user.isAuth ?
                      <Nav className="ml-auto" style={{color: 'white'}}>
                         <Button
                             variant="outline-light"
-                            onClick={() => navigate(ADMIN_ROUTE, {replace: true})}
+                            onClick={() => navigate(LK_ROUTE, {replace: true})}
                         >
                             Личный кабинет
                         </Button>

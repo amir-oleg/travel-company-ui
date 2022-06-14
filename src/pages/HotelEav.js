@@ -5,20 +5,20 @@ import {Row, Col} from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import {useParams} from 'react-router-dom'; 
 import {Context} from "../index";
-import {getAccomodationsInHotel, getHotelById} from "../API/HotelService";
-import AccomodationItem from "../components/AccomodationItem"
+import {getAccomodationsInHotelEav, getHotelByIdEav} from "../API/HotelService";
+import AccomodationItemEav from "../components/AccomodationItemEav"
 
-const Hotel = observer( () => {
+const HotelEav = observer( () => {
     const {searchStore} = useContext(Context)
     const {id} = useParams() 
     const [hotel, setHotel] = useState({})
     const [accomodations, setAccs] = useState([]);
 
     useEffect(() => {
-        getHotelById(id).then(
+        getHotelByIdEav(id).then(
             doc => setHotel(doc)
         );   
-        getAccomodationsInHotel(id, searchStore.startDate, searchStore.endDate, searchStore.guests).then(
+        getAccomodationsInHotelEav(id, searchStore.startDate, searchStore.endDate, searchStore.guests).then(
             doc => setAccs(doc)
         )
     }, [id, searchStore.endDate, searchStore.guests, searchStore.startDate]);
@@ -29,14 +29,14 @@ const Hotel = observer( () => {
             <h1>{hotel.hotelName}</h1>
             <Image width={700} src={`${process.env.REACT_APP_API_URL}/api/images/${hotel.previewImage}`}/>
             <div>
-                    <Row>
-                        <Col>Дата основания : {hotel.dateOfFoundation}</Col>
-                        <Col>Метров до пляжа: {hotel.metersToBeach}</Col>
-                        <Col>Тип питания: {hotel.typeOfDiet}</Col>
-                    </Row>
+                <Row>
+                {Array.isArray(hotel.services) && hotel.services.length && hotel.services.map( service =>
+                        <Col key={service.name}>{service.name} : {service.value} {service.measureOfUnit}</Col>
+                )}
+                </Row>
             </div>
             {accomodations.map(acc =>
-                <AccomodationItem key={acc.name} acc={acc}/>
+                <AccomodationItemEav key={acc.name} acc={acc}/>
             )}
             </div>
         </div>
@@ -44,4 +44,4 @@ const Hotel = observer( () => {
 
 });
 
-export default Hotel
+export default HotelEav

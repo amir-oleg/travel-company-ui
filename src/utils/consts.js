@@ -1,4 +1,5 @@
-export const ADMIN_ROUTE = "/admin"
+export const LK_ROUTE = "/lk"
+export const LK_FREE_ORDERS_ROUTE = "/free"
 export const LOGIN_ROUTE = "/login"
 export const REGISTRATION_ROUTE = "/registration"
 export const HOME_ROUTE = "/"

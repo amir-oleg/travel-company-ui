@@ -15,3 +15,13 @@ import {$host} from "./index";
         const response = await $host.get(`api/hotels/${hotelId}/`)
         return response.data
     }
+
+    export const getAccomodationsInHotelEav = async (hotelId, startDate, endDate, guests) => {
+        const response = await $host.get(`api/hotels/${hotelId}/accomodations/eav`, {params: { startDate, endDate, guests}})
+        return response.data
+    }
+
+    export const getHotelByIdEav = async (hotelId) => {
+        const response = await $host.get(`api/hotels/${hotelId}/eav`)
+        return response.data
+    }

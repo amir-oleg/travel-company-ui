@@ -16,6 +16,10 @@ const Auth = observer(() => {
     const navigate = useNavigate()
     const isLogin = location.pathname === LOGIN_ROUTE
     const [email, setEmail] = useState('')
+    const [phone, setPhone] = useState('')
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [patronymic, setPatronymic] = useState('')
     const [password, setPassword] = useState('')
 
     const click = async () => {
@@ -27,7 +31,7 @@ const Auth = observer(() => {
                 user.setRoles(decodeToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"])
                 navigate(HOME_ROUTE)
             } else {
-                await registration(email, password);
+                await registration(email, password, phone, firstName, lastName, patronymic);
                 navigate(LOGIN_ROUTE)
             }
             
@@ -51,6 +55,39 @@ const Auth = observer(() => {
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                     />
+                    {
+                    !isLogin &&
+                    <Form.Control
+                        className="mt-3"
+                        placeholder="Введите ваш номер телефона..."
+                        value={phone}
+                        onChange={e => setPhone(e.target.value)}
+                    />
+                    }
+                    {
+                    !isLogin && <Form.Control
+                    className="mt-3"
+                    placeholder="Введите ваше имя..."
+                    value={firstName}
+                    onChange={e => setFirstName(e.target.value)}
+                    />
+                    }
+                    {
+                    !isLogin &&<Form.Control
+                        className="mt-3"
+                        placeholder="Введите вашу фамилию..."
+                        value={lastName}
+                        onChange={e => setLastName(e.target.value)}
+                    />
+                    }
+                    {
+                    !isLogin && <Form.Control
+                        className="mt-3"
+                        placeholder="Введите ваше отчество..."
+                        value={patronymic}
+                        onChange={e => setPatronymic(e.target.value)}
+                    />
+                    }
                     <Form.Control
                         className="mt-3"
                         placeholder="Введите ваш пароль..."

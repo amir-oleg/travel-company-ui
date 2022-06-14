@@ -7,7 +7,7 @@ import {bookRoom} from "../API/OrdersService"
 import {Context} from "../index";
 import {HOME_ROUTE} from "../utils/consts";
 
-function AccomodationItem({acc}) {
+function AccomodationItemEav({acc}) {
 
     const {searchStore} = useContext(Context)
     const navigate = useNavigate()
@@ -32,9 +32,9 @@ function AccomodationItem({acc}) {
                 </Carousel>
                 <div>
                     <Row>
-                        <Col>Кондиционер : {acc.isAcExists ? "Присутствует" : "Отсутствует"}</Col>
-                        <Col>Wifi: {acc.isWifiExists ? "Присутствует" : "Отсутствует"}</Col>
-                        <Col>Туалет в номере: {acc.isWcExists ? "Присутствует" : "Отсутствует"}</Col>
+                        {Array.isArray(acc.services) && acc.services.length && acc.services.map( service =>
+                        <Col key={service.name}>{service.name} : {service.value} {service.measureOfUnit}</Col>
+                        )}
                     </Row>
                 </div>
             </div>
@@ -46,4 +46,4 @@ function AccomodationItem({acc}) {
     );
 }
 
-export default AccomodationItem;
+export default AccomodationItemEav;
