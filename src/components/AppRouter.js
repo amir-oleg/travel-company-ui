@@ -8,6 +8,7 @@ import {LK_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, HOME_ROUTE, HOTELS_ROUTE, LK_
 import Auth from "../pages/Auth";
 import HotelsList from './HotelsList';
 import HotelEav from '../pages/HotelEav';
+import HotelEavAdmin from '../pages/HotelEavAdmin';
 
 const AppRouter = observer(() => {
     const {user} = useContext(Context)
@@ -19,8 +20,10 @@ const AppRouter = observer(() => {
             <Route path={LOGIN_ROUTE} element={<Auth/>} />
             <Route path={REGISTRATION_ROUTE} element={<Auth/>} />
             <Route path={HOTELS_ROUTE} element={<HotelsList/>} />
+            {user.roles.includes("Admin") ? 
+                <Route path="/hotels/:id" element={<HotelEavAdmin/>} /> :
                 <Route path="/hotels/:id" element={<HotelEav/>} />
-            
+            }
         </Routes>
     );
 });

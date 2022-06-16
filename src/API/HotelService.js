@@ -1,4 +1,4 @@
-import {$host} from "./index";
+import {$host, $authHost} from "./index";
 
     export const getBySearchParams = async (country, startDate, endDate, guests) => {
         const response = await $host.get('api/accomodations', {params: { country, startDate, endDate, guests}})
@@ -6,8 +6,8 @@ import {$host} from "./index";
         return response.data
     }
 
-    export const getAccomodationsInHotel = async (hotelId, startDate, endDate, guests) => {
-        const response = await $host.get(`api/hotels/${hotelId}/accomodations`, {params: { startDate, endDate, guests}})
+    export const getAccomodationsInHotel = async (hotelId) => {
+        const response = await $host.get(`api/hotels/${hotelId}/accomodations`)
         return response.data
     }
 
@@ -23,5 +23,10 @@ import {$host} from "./index";
 
     export const getHotelByIdEav = async (hotelId) => {
         const response = await $host.get(`api/hotels/${hotelId}/eav`)
+        return response.data
+    }
+
+    export const getHotelBySearchString = async (search, page) => {
+        const response = await $authHost.get(`api/hotels`, {params: { search, page}})
         return response.data
     }

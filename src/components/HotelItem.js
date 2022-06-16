@@ -13,14 +13,16 @@ function HotelItem({hotel}) {
         <Col className="mt-3" style={{display:"flex", justifyContent: "center"}}>
             <Card style={{width: 270, cursor: 'pointer'}} border="light" onClick={() => navigate(path)}>
                 <Image width={270} height={270} src={`${process.env.REACT_APP_API_URL}/api/images/${hotel.previewImage}`}/>
+                {typeof hotel.countOfStars !== 'undefined' ? 
                 <div className="text-black-50 mt-1 d-flex justify-content-between align-items-center">
                     <div className="d-flex align-items-center">
                         <div>{hotel.countOfStars}</div>
                         <Image width={18} height={18} src={star}/>
                     </div>
-                </div>
+                </div> : null}
                 <div>{hotel.name}</div>
-                <div>От: {hotel.lowestPrice}р.</div>
+                {typeof hotel.lowestPrice !== 'undefined' ?
+                <div>От: {hotel.lowestPrice}р.</div> : null}
             </Card>
         </Col>
     );
