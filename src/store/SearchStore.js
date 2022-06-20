@@ -1,35 +1,44 @@
 /* eslint-disable no-underscore-dangle */
-import {makeAutoObservable} from "mobx";
+import { makeAutoObservable } from 'mobx'
 
 export default class SearchStore {
-    constructor() {
-        this._startDate = {}
-        this._endDate = {}
-        this._guests = {}
-        makeAutoObservable(this)
-    }
+	constructor() {
+		this._startDate = {}
+		this._endDate = {}
+		this._guests = {}
+		this._countries = []
+		makeAutoObservable(this)
+	}
 
-    setStartDate(startDate){
-        this._startDate = startDate
-    }
+	setStartDate(startDate) {
+		this._startDate = startDate
+	}
 
-    setEndDate(endDate){
-        this._endDate = endDate
-    }
+	setEndDate(endDate) {
+		this._endDate = endDate
+	}
 
-    setGuests(guests){
-        this._guests = guests
-    }
+	setGuests(guests) {
+		this._guests = guests
+	}
 
-    get startDate() {
-        return this._startDate
-    }
+	setCountries(countries) {
+		this._countries = countries
+	}
 
-    get endDate() {
-        return this._endDate
-    }
+	get startDate() {
+		return this._startDate
+	}
 
-    get guests() {
-        return this._guests
-    }
+	get endDate() {
+		return this._endDate
+	}
+
+	get guests() {
+		return this._guests
+	}
+
+	get countries() {
+		return this._countries
+	}
 }

@@ -1,24 +1,26 @@
 /* eslint-disable import/no-cycle */
-import {BrowserRouter} from "react-router-dom";
-import {observer} from "mobx-react-lite";
-import { useContext } from "react";
-import AppRouter from "./components/AppRouter";
-import NavBar from "./components/NavBar";
-import SearchHotels from "./components/SearchHotels";
-import SearchHotelsAdmin from "./components/SearchHotelsAdmin";
-import {Context} from "./index";
+import { BrowserRouter } from 'react-router-dom'
+import { observer } from 'mobx-react-lite'
+import { useContext, useEffect } from 'react'
+import AppRouter from './components/AppRouter'
+import NavBar from './components/NavBar'
+import { Context } from './index'
+import { getCountries } from './API/ConstsService'
 
 const App = observer(() => {
-        const {user} = useContext(Context)
+	const { searchStore } = useContext(Context)
 
-        return (<BrowserRouter>
-            <NavBar />
-            {user.roles.includes("Admin") ?
-            <SearchHotelsAdmin/>:
-            <SearchHotels />
-            }
-            <AppRouter />
-        </BrowserRouter>)
-    });
+	useEffect(() => {
+		getCountries().then((data) => searchStore.setCountries(data))
+	}, [])
 
-export default App;
+	return (
+		<BrowserRouter>
+			<NavBar />
+
+			<AppRouter />
+		</BrowserRouter>
+	)
+})
+
+export default App

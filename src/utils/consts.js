@@ -1,9 +1,17 @@
-export const LK_ROUTE = "/lk"
-export const LK_FREE_ORDERS_ROUTE = "/free"
-export const LOGIN_ROUTE = "/login"
-export const REGISTRATION_ROUTE = "/registration"
-export const HOME_ROUTE = "/"
-export const HOTELS_ROUTE = "/hotels"
-export const UserRole = "User"
-export const ManagerRole = "Manager"
-export const AdminRole = "Admin"
+export const LK_ROUTE = '/lk'
+export const LK_FREE_ORDERS_ROUTE = '/free'
+export const LOGIN_ROUTE = '/login'
+export const REGISTRATION_ROUTE = '/registration'
+export const HOME_ROUTE = '/'
+export const HOTELS_ROUTE = '/hotels'
+export const TOURS_ROUTE = '/tours'
+export const TOUR_ADD_ROUTE = '/tour/add'
+export const TOURS_SEARCH_ROUTE = '/tours/search'
+export const HOTEL_ADD_ROUTE = '/hotel/add'
+export const HOTEL_SEARCH_ROUTE = '/hotels/search'
+export const HOTEL_ADMIN_SEARCH_ROUTE = '/hotels/admin-search'
+export const UserRole = 'User'
+export const ManagerRole = 'Manager'
+export const AdminRole = 'Admin'
+
+export const TransportTypes = ['Самолет', 'Автобус', 'Поезд']

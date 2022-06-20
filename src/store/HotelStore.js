@@ -22,10 +22,6 @@ export default class HotelStore {
         this._totalCount = totalCount
     }
 
-    setLimit(limit){
-        this._limit = limit
-    }
-
     get hotels() {
         return this._hotels
     }
@@ -36,9 +32,5 @@ export default class HotelStore {
 
     get page() {
         return this._page
-    }
-
-    get limit() {
-        return this._limit
     }
 }
