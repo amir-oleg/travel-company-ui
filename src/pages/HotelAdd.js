@@ -15,6 +15,7 @@ const HotelAdd = observer(() => {
 	const [hotelName, setHotelName] = useState('')
 	const [city, setCity] = useState('')
 	const [country, setCountry] = useState('')
+	const [count, setCount] = useState(1)
 	const [image, setImage] = useState('')
 	const [hotelCategory, setHotelCategory] = useState('')
 	const [hotelAttributes, setHotelAttributes] = useState([])
@@ -82,6 +83,7 @@ const HotelAdd = observer(() => {
 				name: '',
 				capacity: '',
 				pricePerDay: '',
+				count,
 				images: [],
 				attributes: [],
 				key: id,
@@ -314,6 +316,23 @@ const HotelAdd = observer(() => {
 									defaultValue="1000"
 								/>
 							</Form.Group>
+							<Form.Group
+								as={Col}
+								controlId="formGridCount"
+							>
+								<Form.Label>Кол-во номеров</Form.Label>
+							<Form.Control
+									value={acc.count}
+									onChange={(e) => {
+										// eslint-disable-next-line prefer-const
+										let temp = [...accomodations]
+										temp[index].count = e.target.value
+										setAccomodations(temp)
+									}}
+									type="number"
+									min="1"
+									/>
+								</Form.Group>
 							<Form.Group as={Col} controlId="formGridAccImgs">
 								<Form.Label>Фотографии номера</Form.Label>
 								<Form.Control
