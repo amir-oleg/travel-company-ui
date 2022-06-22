@@ -65,7 +65,7 @@ const AppRouter = observer(() => {
 			)}
 			<Route path={TOURS_ROUTE} element={<ToursList />} />
 			{user.roles.includes('Admin') ? (
-				<Route path="/tours/tour/:id" element={<HotelEavAdmin />} />
+				<Route path="/tours/tour/:id" element={<Tour />} />
 			) : (
 				<Route path="/tours/tour/:id" element={<Tour />} />
 			)}
