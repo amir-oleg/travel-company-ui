@@ -6,6 +6,7 @@ import AppRouter from './components/AppRouter'
 import NavBar from './components/NavBar'
 import { Context } from './index'
 import { getCountries } from './API/ConstsService'
+import Footer from './components/Footer'
 
 const App = observer(() => {
 	const { searchStore } = useContext(Context)
@@ -18,6 +19,7 @@ const App = observer(() => {
 		<BrowserRouter>
 			<NavBar />
 			<AppRouter />
+			<Footer />
 		</BrowserRouter>
 	)
 })

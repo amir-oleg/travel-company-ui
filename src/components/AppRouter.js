@@ -29,6 +29,7 @@ import SearchHotels from './SearchHotels'
 import SearchTours from './SearchTours'
 import SearchHotelsAdmin from './SearchHotelsAdmin'
 import HotelAdd from '../pages/HotelAdd'
+import HomePage from '../pages/HomePage'
 
 const AppRouter = observer(() => {
 	const { user } = useContext(Context)
@@ -85,6 +86,7 @@ const AppRouter = observer(() => {
 			) : (
 				<Route path={HOTEL_SEARCH_ROUTE} element={<SearchHotels />} />
 			)}
+			<Route path={HOME_ROUTE} element={<HomePage />} />
 		</Routes>
 	)
 })

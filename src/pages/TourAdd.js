@@ -7,13 +7,14 @@ import { useNavigate } from 'react-router-dom'
 import Select from 'react-select'
 import { Context } from '../index'
 import MultiValue from '../components/MultiValue'
-import { TOUR_ADD_ROUTE, TransportTypes } from '../utils/consts'
+import { TOUR_ADD_ROUTE } from '../utils/consts'
 import {
 	getDietTypes,
 	getTourCategories,
 	getCities,
 	getHotels,
 	getAccs,
+	getTransportTypes,
 } from '../API/ConstsService'
 import { addTour } from '../API/ToursService'
 
@@ -23,7 +24,7 @@ const TourAdd = observer(() => {
 	const [endCity, setEndCity] = useState(0)
 	const [startCountry, setStartCountry] = useState(0)
 	const [endCountry, setEndCountry] = useState(0)
-	const [transportType, setTransportType] = useState('Самолет')
+	const [transportType, setTransportType] = useState('AI')
 	const [guestsCount, setGuestsCount] = useState(2)
 	const [childrenCount, setChildrenCount] = useState(0)
 	const [days, setDays] = useState(7)
@@ -40,10 +41,8 @@ const TourAdd = observer(() => {
 	const [allTourCategories, setAllTourCategories] = useState([])
 	const [allHotels, setAllHotels] = useState([])
 	const [allAccs, setAllAccs] = useState([])
-	const allTransportTypes = TransportTypes.map((x) => ({
-		value: x,
-		label: x,
-	}))
+	const [allTransportTypes, setAllTransportTypes] = useState([])
+
 	const allCountries = searchStore.countries.map((x) => ({
 		value: x.id,
 		label: x.name,
@@ -83,6 +82,13 @@ const TourAdd = observer(() => {
 			setAllAccs(data.map((x) => ({ value: x.id, label: x.name })))
 		)
 	}, [hotel])
+	useEffect(() => {
+		getTransportTypes(transportType).then((data) =>
+			setAllTransportTypes(
+				data.map((x) => ({ value: x.code, label: x.value }))
+			)
+		)
+	}, [transportType])
 
 	const click = async () => {
 		await addTour(
