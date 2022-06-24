@@ -57,7 +57,47 @@ const managerCabinet = () => {
             <Button onClick ={() => navigate(LK_FREE_ORDERS_ROUTE)}>Показать новые заказы</Button>
         </div>
         }
-        {!isFreeOrders && Array.isArray(user.orders) && user.orders.length ? user.orders.map(order => 
+        {!isFreeOrders ?
+        <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>№ Заказа</th>
+            <th>Клиент</th>
+            <th>Данные заказа</th>
+            <th>Даты заказа</th>
+            <th>Стоимость</th>
+            <th>Действия</th>
+          </tr>
+        </thead>
+        <tbody>
+        {Array.isArray(user.orders) && user.orders.length ? user.orders.map(order =>
+          <tr key={stat.managerName}>
+            <td>{stat.managerName}</td>
+            <td>{stat.income}</td>
+          </tr>)}
+        </tbody>
+        </Table> : 
+        <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>№ Заказа</th>
+            <th>Клиент</th>
+            <th>Данные заказа</th>
+            <th>Даты заказа</th>
+            <th>Стоимость</th>
+            <th>Действия</th>
+          </tr>
+        </thead>
+        <tbody>
+        {Array.isArray(user.orders) && user.orders.length ? user.orders.map(order =>
+          <tr key={stat.managerName}>
+            <td>{stat.managerName}</td>
+            <td>{stat.income}</td>
+          </tr>)}
+        </tbody>
+        </Table>}
+
+        Array.isArray(user.orders) && user.orders.length ? user.orders.map(order => 
             <Row key={order.id}>
                 <Col>№ {order.id}</Col>
                 <Col>Имя клиента: {order.clientName}<br/>Номер: {order.clientPhoneNumber}</Col>

@@ -14,7 +14,7 @@ const App = observer(() => {
 	useEffect(() => {
 		getCountries().then((data) => searchStore.setCountries(data))
 	}, [])
-
+	
 	return (
 		<BrowserRouter>
 			<NavBar />

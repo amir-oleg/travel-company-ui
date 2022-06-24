@@ -1,6 +1,6 @@
 /* eslint-disable import/no-cycle */
 import {useState, useEffect} from 'react';
-import {Row, Col} from "react-bootstrap";
+import {Table} from "react-bootstrap";
 import {getAdminStats} from "../API/PersonalCabinetService"
 
 
@@ -15,12 +15,24 @@ const adminCabinet = () => {
 
     return (
     <div>
-        <div>Статистика по менеджерам:</div>
-        {Array.isArray(stats) && stats.length ? stats.map(stat => 
-            <Row key={stat.managerName}>
-                <Col>Менеджер: {stat.managerName}</Col>
-                <Col>Прибыль: {stat.income}</Col>
-            </Row>) : <p>Статистика отсутствует</p>}
+        <h2>Статистика по менеджерам:</h2>
+        <Table striped bordered hover>
+  <thead>
+    <tr>
+      <th>№</th>
+      <th>Менеджер</th>
+      <th>Доход</th>
+    </tr>
+  </thead>
+  <tbody>
+  {Array.isArray(stats) && stats.length ? stats.map((stat, index) =>
+    <tr key={stat.managerName}>
+        <td>{index}</td>
+      <td>{stat.managerName}</td>
+      <td>{stat.income}</td>
+    </tr>) : null}
+  </tbody>
+</Table>
     </div>
     );
 };

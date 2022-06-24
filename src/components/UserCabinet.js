@@ -1,6 +1,7 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable import/no-cycle */
 import {useState, useEffect} from 'react';
-import {Row, Col, Button} from "react-bootstrap";
+import {Button, Table} from "react-bootstrap";
 import {useNavigate} from 'react-router-dom';
 import {getPersonalData} from "../API/PersonalCabinetService"
 import {cancelBook} from "../API/OrdersService"
@@ -26,18 +27,34 @@ const userCabinet = () => {
 
     return (
     <div>
-        <div>Имя: {user.firstName}</div>
-        <div>Фамилия: {user.lastName}</div>
-        <div>Отчество: {user.patronymic}</div>
-        <div>Заказы:</div>
-        {Array.isArray(user.orders) && user.orders.length ? user.orders.map(order => 
-            <Row key={user.orders.id}>
-                <Col>№ {order.id}</Col>
-                <Col>Отель: {order.hotelName} Номер: {order.accomodationName}</Col>
-                <Col>С: {order.startDate} По: {order.endDate}</Col>
-                <Col>{order.price}р. <Button  onClick={() => click(order.id)} >Отменить</Button></Col>
-                
-            </Row>) : <p>Заказы отсутствуют</p>}
+        <h3>Имя: {user.firstName}</h3>
+        <h3>Фамилия: {user.lastName}</h3>
+        <h3>Отчество: {user.patronymic}</h3>
+        <br/>
+        <h3>Заказы:</h3>
+        <Table striped bordered hover>
+  <thead>
+    <tr>
+      <th>№ Заказа</th>
+      <th>Содержание</th>
+      <th>С</th>
+      <th>По</th>
+      <th>Стоимость</th>
+      <th>Действие</th>
+    </tr>
+  </thead>
+  <tbody>
+  {Array.isArray(user.orders) && user.orders.length ? user.orders.map(order => 
+    <tr key={order.id}>
+      <td>{order.id}</td>
+      <td>{order.hotelName}<br/>{order.accomodationName}</td>
+      <td>{order.startDate}</td>
+      <td>{order.endDate}</td>
+      <td>{order.price}</td>
+      <td><Button  onClick={() => click(order.id)}>Отменить</Button></td>
+    </tr>) : null}
+  </tbody>
+</Table>
     </div>
     );
 };
