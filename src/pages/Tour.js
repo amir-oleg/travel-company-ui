@@ -1,22 +1,33 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable import/no-cycle */
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { observer } from 'mobx-react-lite'
 import { Row, Col, Carousel } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 import Image from 'react-bootstrap/Image'
 import { useParams } from 'react-router-dom'
+import { Context } from '../index'
 import { getTourById } from '../API/ToursService'
+import { createOrder } from '../API/OrdersService'
 import arrow from '../assests/arrow.png'
 import food from '../assests/food.png'
 
 const Tour = observer(() => {
 	const { id } = useParams()
 	const [tour, setTour] = useState({})
+	const { searchStore } = useContext(Context)
 
 	useEffect(() => {
 		getTourById(id).then((doc) => setTour(doc))
 	}, [id])
+
+	const click = async () => {
+		await createOrder(
+			searchStore.startDate,
+			searchStore.endDate,
+			tour.accomodation.accomodationId
+		)
+	}
 
 	return (
 		<div className="border d-flex align-items-center justify-content-center customHeight">
@@ -46,7 +57,7 @@ const Tour = observer(() => {
 						<h3>Цена: {tour.price}р.</h3>
 					</Col>
 					<Col>
-						<Button>Оставить заявку</Button>
+						<Button onClick={() => click()}>Оставить заявку</Button>
 					</Col>
 				</Row>
 				<Row>
