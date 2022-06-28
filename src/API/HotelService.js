@@ -66,3 +66,8 @@ export const addHotel = async (
 	})
 	return response.data
 }
+
+export const getHotelStats = async (hotelId) => {
+	const response = await $host.get(`api/hotels/${hotelId}/stats`)
+	return response.data
+}

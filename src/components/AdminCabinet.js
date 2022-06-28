@@ -49,15 +49,9 @@ function AdminCabinet() {
 					<Table striped bordered hover bgcolor="white">
 						<thead>
 							<tr>
-								<Table.HeaderColumn dataSort>
-									№
-								</Table.HeaderColumn>
-								<Table.HeaderColumn dataSort>
-									Менеджер
-								</Table.HeaderColumn>
-								<Table.HeaderColumn dataSort>
-									Доход
-								</Table.HeaderColumn>
+								<th>№</th>
+								<th>Менеджер</th>
+								<th>Доход</th>
 							</tr>
 						</thead>
 						<tbody>

@@ -49,7 +49,7 @@ function AccomodationItemEav({ acc }) {
 						{Array.isArray(acc.services) &&
 							acc.services.length &&
 							acc.services.map((service) => (
-								<Col key={service.name}>
+								<Col>
 									{service.name} : {service.value}{' '}
 									{service.measureOfUnit}
 								</Col>

@@ -16,12 +16,12 @@ export const getNewOrders = async () => {
 	return response.data
 }
 
-export const getAdminStats = async () => {
-	const response = await $authHost.get(`api/lk/admin`)
+export const getAdminStats = async (month) => {
+	const response = await $authHost.post(`api/lk/admin`, { month })
 	return response.data
 }
 
-export const getTourStats = async () => {
-	const response = await $authHost.get(`api/lk/admin/tours`)
+export const getTourStats = async (month) => {
+	const response = await $authHost.post(`api/lk/admin/tours`, { month })
 	return response.data
 }

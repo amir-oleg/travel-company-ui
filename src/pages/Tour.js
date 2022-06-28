@@ -2,7 +2,7 @@
 /* eslint-disable import/no-cycle */
 import { useState, useEffect, useContext } from 'react'
 import { observer } from 'mobx-react-lite'
-import { Row, Col, Carousel } from 'react-bootstrap'
+import { Row, Col, Carousel, NavLink } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 import Image from 'react-bootstrap/Image'
 import { useParams } from 'react-router-dom'
@@ -16,16 +16,22 @@ const Tour = observer(() => {
 	const { id } = useParams()
 	const [tour, setTour] = useState({})
 	const { searchStore } = useContext(Context)
+	const [showTdetails, setShowTdetails] = useState(false)
+	const [showHdetails, setShowHdetails] = useState(false)
+	const [showAdetails, setShowAdetails] = useState(false)
 
 	useEffect(() => {
 		getTourById(id).then((doc) => setTour(doc))
 	}, [id])
 
 	const click = async () => {
+		const endDate = new Date(searchStore.startDate)
+		endDate.setDate(endDate.getDate() + tour.days)
 		await createOrder(
 			searchStore.startDate,
-			searchStore.endDate,
-			tour.accomodation.accomodationId
+			endDate,
+			tour.accomodation.accomodationId,
+			tour.id
 		)
 	}
 
@@ -89,17 +95,28 @@ const Tour = observer(() => {
 						<h5>Ночей: {tour.days}</h5>
 					</Col>
 				</Row>
-				<Row>
-					<h4>Детали:</h4>
-				</Row>
-				{tour.services &&
-					tour.services.map((x) => (
-						<Row key={x.name}>
-							<Col>
-								{x.name} : {x.value} {x.measureOfUnit}
-							</Col>
+				{showTdetails ? (
+					<>
+						<NavLink onClick={() => setShowTdetails(false)}>
+							Скрыть детали
+						</NavLink>
+						<Row>
+							<h4>Детали:</h4>
 						</Row>
-					))}
+						{tour.services &&
+							tour.services.map((x) => (
+								<Row key={x.name}>
+									<Col>
+										{x.name} : {x.value} {x.measureOfUnit}
+									</Col>
+								</Row>
+							))}
+					</>
+				) : (
+					<NavLink onClick={() => setShowTdetails(true)}>
+						Показать детали
+					</NavLink>
+				)}
 				{typeof tour.accomodation === 'undefined' ? null : (
 					<>
 						<Row className="mt-3">
@@ -118,14 +135,26 @@ const Tour = observer(() => {
 								Категория отеля:{tour.accomodation.category}
 							</h4>
 						</Row>
-						{tour.accomodation.hotelServices &&
-							tour.accomodation.hotelServices.map((x) => (
-								<Row key={x.name}>
-									<Col>
-										{x.name} : {x.value} {x.measureOfUnit}
-									</Col>
-								</Row>
-							))}
+						{showHdetails ? (
+							<>
+								<NavLink onClick={() => setShowHdetails(false)}>
+									Скрыть детали
+								</NavLink>
+								{tour.accomodation.hotelServices &&
+									tour.accomodation.hotelServices.map((x) => (
+										<Row key={x.name}>
+											<Col>
+												{x.name} : {x.value}{' '}
+												{x.measureOfUnit}
+											</Col>
+										</Row>
+									))}{' '}
+							</>
+						) : (
+							<NavLink onClick={() => setShowHdetails(true)}>
+								Показать детали
+							</NavLink>
+						)}
 						<Row className="mt-3">
 							<h3>
 								Номер "{tour.accomodation.accomodationName}"
@@ -164,22 +193,46 @@ const Tour = observer(() => {
 									)}
 								</Carousel>
 								<div>
-									{Array.isArray(
-										tour.accomodation.accomodationServices
-									) &&
-										tour.accomodation.accomodationServices
-											.length &&
-										tour.accomodation.accomodationServices.map(
-											(service) => (
-												<Row key={service.name}>
-													<Col>
-														{service.name} :{' '}
-														{service.value}{' '}
-														{service.measureOfUnit}
-													</Col>
-												</Row>
-											)
-										)}
+									{showAdetails ? (
+										<>
+											<NavLink
+												onClick={() =>
+													setShowAdetails(false)
+												}
+											>
+												Скрыть детали
+											</NavLink>
+											{Array.isArray(
+												tour.accomodation
+													.accomodationServices
+											) &&
+												tour.accomodation
+													.accomodationServices
+													.length &&
+												tour.accomodation.accomodationServices.map(
+													(service) => (
+														<Row key={service.name}>
+															<Col>
+																{service.name} :{' '}
+																{service.value}{' '}
+																{
+																	service.measureOfUnit
+																}
+															</Col>
+														</Row>
+													)
+												)}{' '}
+										</>
+									) : (
+										<NavLink
+											style={{ marginBottom: '3rem' }}
+											onClick={() =>
+												setShowAdetails(true)
+											}
+										>
+											Показать детали
+										</NavLink>
+									)}
 								</div>
 							</div>
 						</div>

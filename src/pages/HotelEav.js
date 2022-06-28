@@ -27,6 +27,8 @@ const HotelEav = observer(() => {
 		).then((doc) => setAccs(doc))
 	}, [id, searchStore.endDate, searchStore.guests, searchStore.startDate])
 
+	console.log('USERUSERUSER')
+
 	return (
 		<div className="border d-flex align-items-center justify-content-center customHeight">
 			<div>
@@ -36,16 +38,16 @@ const HotelEav = observer(() => {
 					src={`${process.env.REACT_APP_API_URL}/api/images/${hotel.previewImage}`}
 				/>
 				<div>
-					<Row>
-						{Array.isArray(hotel.services) &&
-							hotel.services.length &&
-							hotel.services.map((service) => (
-								<Col key={service.name}>
+					{Array.isArray(hotel.services) &&
+						hotel.services.length &&
+						hotel.services.map((service) => (
+							<Row key={service.name}>
+								<Col>
 									{service.name} : {service.value}{' '}
 									{service.measureOfUnit}
 								</Col>
-							))}
-					</Row>
+							</Row>
+						))}
 				</div>
 				{accomodations.map((acc) => (
 					<AccomodationItemEav key={acc.name} acc={acc} />

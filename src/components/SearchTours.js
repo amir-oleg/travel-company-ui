@@ -39,6 +39,8 @@ const SearchTours = observer(() => {
 	const [allHotelCategories, setAllHotelCategories] = useState([])
 	const [allTourCategories, setAllTourCategories] = useState([])
 	const [allTransportTypes, setAllTransportTypes] = useState([])
+	const { searchStore } = useContext(Context)
+
 	useEffect(() => {
 		getDietTypes().then((data) =>
 			setAllDietTypes(data.map((x) => ({ value: x.code, label: x.code })))
@@ -90,6 +92,8 @@ const SearchTours = observer(() => {
 				priceTo,
 				page
 			)
+			searchStore.setStartDate(startDate)
+			searchStore.setDats(days)
 			tours.setTours(response.tours)
 			tours.setTotalCount(response.pageCount)
 			navigate(TOURS_ROUTE, { replace: true })

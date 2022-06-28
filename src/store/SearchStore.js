@@ -7,6 +7,7 @@ export default class SearchStore {
 		this._endDate = {}
 		this._guests = {}
 		this._countries = []
+		this._days = {}
 		makeAutoObservable(this)
 	}
 
@@ -26,6 +27,10 @@ export default class SearchStore {
 		this._countries = countries
 	}
 
+	setDays(days) {
+		this._days = days
+	}
+
 	get startDate() {
 		return this._startDate
 	}
@@ -40,5 +45,9 @@ export default class SearchStore {
 
 	get countries() {
 		return this._countries
+	}
+
+	get days() {
+		return this._days
 	}
 }
