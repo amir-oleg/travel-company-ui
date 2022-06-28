@@ -15,8 +15,11 @@ const style = {
 
 export default function Footer() {
 	return (
+		<>
+		<div style={{width: '100%', height: '60px'}}/>
 		<Navbar bg="dark" variant="dark" style={style}>
 			<Button>О нас</Button>
 		</Navbar>
+		</>
 	)
 }

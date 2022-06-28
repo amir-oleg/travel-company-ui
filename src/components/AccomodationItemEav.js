@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable import/no-cycle */
-import { useContext } from 'react'
-import { Button, Carousel, Row, Col } from 'react-bootstrap'
+import { useContext, useState } from 'react'
+import { Button, Carousel, Row, Col, NavLink } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { createOrder } from '../API/OrdersService'
 import { Context } from '../index'
@@ -10,6 +10,7 @@ import { HOME_ROUTE } from '../utils/consts'
 function AccomodationItemEav({ acc }) {
 	const { searchStore } = useContext(Context)
 	const navigate = useNavigate()
+	const [showAdetails, setShowAdetails] = useState(false)
 
 	const click = async () => {
 		await createOrder(searchStore.startDate, searchStore.endDate, acc.id, 0)
@@ -25,7 +26,9 @@ function AccomodationItemEav({ acc }) {
 				alignItems: 'flex-start',
 			}}
 		>
+			
 			<div>
+			<h4>{acc.name}</h4>
 				<Carousel
 					style={{
 						width: 270,
@@ -45,21 +48,34 @@ function AccomodationItemEav({ acc }) {
 					))}
 				</Carousel>
 				<div>
-					<Row>
-						{Array.isArray(acc.services) &&
-							acc.services.length &&
-							acc.services.map((service) => (
-								<Col>
-									{service.name} : {service.value}{' '}
-									{service.measureOfUnit}
-								</Col>
+				{showAdetails ? (
+					<>
+						<NavLink onClick={() => setShowAdetails(false)}>
+							Скрыть детали
+						</NavLink>
+						<Row>
+							<h4>Детали:</h4>
+						</Row>
+						{acc.services &&
+							acc.services.map((x) => (
+								<Row key={x.name}>
+									<Col>
+										{x.name} : {x.value} {x.measureOfUnit}
+									</Col>
+								</Row>
 							))}
-					</Row>
+					</>
+				) : (
+					<NavLink onClick={() => setShowAdetails(true)}>
+						Показать детали
+					</NavLink>
+				)}
 				</div>
 			</div>
-			<div>{acc.name}</div>
-			<div>Цена на ваш период: {acc.price}р.</div>
-			<Button onClick={() => click()}>Заказать</Button>
+			<Row style={{marginLeft: "2rem"}}>
+				<Col><h5>Цена на ваш период: {acc.price}р.</h5></Col>
+				<Col><Button onClick={() => click()}>Заказать</Button></Col>
+			</Row>
 		</div>
 	)
 }

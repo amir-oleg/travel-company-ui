@@ -108,7 +108,6 @@ const HotelAdd = observer(() => {
 			key: id,
 		})
 		setAccomodations(temp)
-		console.log(accomodations)
 	}
 
 	const handleInputChange = (event, index) => {
