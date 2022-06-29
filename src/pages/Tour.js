@@ -5,12 +5,13 @@ import { observer } from 'mobx-react-lite'
 import { Row, Col, Carousel, NavLink } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 import Image from 'react-bootstrap/Image'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Context } from '../index'
 import { getTourById } from '../API/ToursService'
 import { createOrder } from '../API/OrdersService'
 import arrow from '../assests/arrow.png'
 import food from '../assests/food.png'
+import { LK_ROUTE } from '../utils/consts'
 
 const Tour = observer(() => {
 	const { id } = useParams()
@@ -19,6 +20,7 @@ const Tour = observer(() => {
 	const [showTdetails, setShowTdetails] = useState(false)
 	const [showHdetails, setShowHdetails] = useState(false)
 	const [showAdetails, setShowAdetails] = useState(false)
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		getTourById(id).then((doc) => setTour(doc))
@@ -31,10 +33,11 @@ const Tour = observer(() => {
 			searchStore.startDate,
 			endDate,
 			tour.accomodation.accomodationId,
-			tour.id
+			id
 		)
+		navigate(LK_ROUTE)
 	}
-
+	console.log(tour)
 	return (
 		<div className="border d-flex align-items-center justify-content-center customHeight">
 			<div>
