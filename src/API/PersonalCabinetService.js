@@ -25,3 +25,8 @@ export const getTourStats = async (month) => {
 	const response = await $authHost.post(`api/lk/admin/tours`, { month })
 	return response.data
 }
+
+export const getDoc = async (id) => {
+	const response = await $authHost.get(`api/lk/doc`, { params: { id }})
+	return response.data
+}

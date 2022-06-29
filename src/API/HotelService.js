@@ -67,6 +67,27 @@ export const addHotel = async (
 	return response.data
 }
 
+export const editHotel = async (
+	id,
+	hotelName,
+	categoryCode,
+	city,
+	previewImageBase64,
+	hotelAttributes,
+	accomodations
+) => {
+	const response = await $authHost.put(`api/hotels/hotel`, {
+		id,
+		hotelName,
+		categoryCode,
+		city,
+		previewImageBase64,
+		hotelAttributes,
+		accomodations,
+	})
+	return response.data
+}
+
 export const getHotelStats = async (hotelId) => {
 	const response = await $authHost.get(`api/hotels/${hotelId}/stats`)
 	return response.data

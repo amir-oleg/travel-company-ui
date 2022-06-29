@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { Button, Table } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
-import { getPersonalData } from '../API/PersonalCabinetService'
+import { getPersonalData, getDoc } from '../API/PersonalCabinetService'
 import { cancelBook } from '../API/OrdersService'
 import { LK_ROUTE } from '../utils/consts'
 
@@ -21,6 +21,10 @@ const userCabinet = () => {
 	const click = async (id) => {
 		await cancelBook(id)
 		navigate(LK_ROUTE, { replace: true })
+	}
+
+	const clickDoc = async(id) => {
+		await getDoc(id)
 	}
 
 	function styleTr(isPaid) {
@@ -71,7 +75,7 @@ const userCabinet = () => {
 											<>
 												Заказ оплачен
 												<br />
-												<Button>Скачать путевку</Button>
+												<Button onClick={()=>clickDoc(order.id)}>Скачать путевку</Button>
 											</>
 										) : (
 											<Button

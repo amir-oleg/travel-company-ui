@@ -93,7 +93,7 @@ const SearchTours = observer(() => {
 				page
 			)
 			searchStore.setStartDate(startDate)
-			searchStore.setDats(days)
+			searchStore.setDays(days)
 			tours.setTours(response.tours)
 			tours.setTotalCount(response.pageCount)
 			navigate(TOURS_ROUTE, { replace: true })

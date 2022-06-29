@@ -56,8 +56,8 @@ function AccomodationItemEav({ acc }) {
 						<Row>
 							<h4>Детали:</h4>
 						</Row>
-						{acc.services &&
-							acc.services.map((x) => (
+						{acc.attributes &&
+							acc.attributes.map((x) => (
 								<Row key={x.name}>
 									<Col>
 										{x.name} : {x.value} {x.measureOfUnit}
