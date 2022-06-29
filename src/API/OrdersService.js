@@ -6,7 +6,7 @@ export const createOrder = async (
 	accomodationId,
 	tourId
 ) => {
-	const response = await $authHost.post('api/orders/create', {
+	const response = await $authHost.post('api/orders/order', {
 		startDate,
 		endDate,
 		accomodationId,
